@@ -12,7 +12,7 @@ import type { SignInResponse } from './types/type';
 import { getCart, setUser } from './store/slice/userSlice';
 import { Tester } from './Components/ui/ComboModal';
 import PrivateRouter from './Components/PrivateRouter';
-
+import Ordering from './pages/Ordering/Ordering';
 
 function App() {
   const dispatch = useAppDispatch()
@@ -29,6 +29,10 @@ function App() {
     })
   }, [])
 
+  useEffect(() =>{
+    dispatch(fetchCities())
+  }, [])
+
   return (
     <div className="App">
         
@@ -36,6 +40,7 @@ function App() {
           <Routes>
             <Route path='/' element={<MainPage/>}/>
             <Route path='/cart' element={ <PrivateRouter><Cart/></PrivateRouter>}/>
+            <Route path='/ordering' element={ <PrivateRouter><Ordering/></PrivateRouter>}/>
             <Route path='*' element={<div>Страница не найдена</div>}/>
           </Routes>    
 

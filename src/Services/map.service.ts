@@ -7,7 +7,7 @@ export type myType={
     metadata?: {}
 } & FeatureCollection
 
- const testjson:myType[]  =[
+ export const testjson:myType[]  =[
     {
         "type": "FeatureCollection",
         "metadata": {

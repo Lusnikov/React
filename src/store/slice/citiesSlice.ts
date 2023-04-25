@@ -5,30 +5,25 @@ import { $api } from "../../api/api";
 type CityType = {city: string, cityId: number}
 
 type initialType = {
-    cities: CityType[] | [],
+    cities: CityType[] ,
     selectedCity: CityType | null,
     loading: 'idle' | 'pending' | 'succeeded' | 'failed'
 } 
 
 const initialState:initialType ={
     cities: [],
-    selectedCity: null,
+    selectedCity:  {city: 'Москва', cityId: 1},
     loading: 'idle',
-
 };
 
 
-const backedCities:CityType[] = [
-    {city: 'мсоква', cityId: 1}
-]
 
 export const fetchCities = createAsyncThunk<CityType[] >(
     'fetchCities', 
     async (_, {rejectWithValue}) =>{
-        const cities = await (await $api.get<any, AxiosResponse<CityType[]>>('/order/getCitie')).data
+        const cities = await (await $api.get<any, AxiosResponse<CityType[]>>('/order/getCities')).data
         return cities
-       
-        
+
     }
 )
 
@@ -37,8 +32,8 @@ export const citiesSlice = createSlice({
     name: "cities",
     initialState,
     reducers:{
-        setCity: (state) =>{
-            
+        setCity: (state, payload: PayloadAction<CityType>) =>{
+            state.selectedCity = payload.payload
         }
     },
     extraReducers: (builder) =>{
@@ -61,5 +56,5 @@ export const citiesSlice = createSlice({
 
 
 
-
+export const { setCity } = citiesSlice.actions
 export default citiesSlice.reducer

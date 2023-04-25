@@ -11,6 +11,8 @@ const Adaptive = (props: Props) => {
   const [width, setWidth] = useState<number>(window.innerWidth)
 
   const isShow = width <= showTo  && width >= showFrom
+
+  console.log(isShow+' ширина - '+width)
    
   useEffect(() =>{
     const handler = () =>{

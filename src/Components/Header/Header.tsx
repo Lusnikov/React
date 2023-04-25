@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { initialStateType } from '../../store/slice/userSlice'
 import Adaptive from '../Adaptive'
+import  { Default, Mobile } from '../responsive'
 import DesktopHeader from '../styled/DesktopHeader'
 import MobileHeader from '../styled/MobileHeader'
 import AuthorizationForm from '../ui/AuthorizationForm'
@@ -23,17 +24,21 @@ const Header = (props: Props) => {
     }
   return (
     <>
-        <Adaptive showTo={600} >
+
+          <Mobile>
             <MobileHeader/>
-          </Adaptive>
-          <Adaptive showFrom={601} >
+          </Mobile>
+          <Default>
             <DesktopHeader 
-              user={user}
-              onCitySelect={handlerOpened}
-              authHandler={authFormHandler}
-              authIsOpened={false}
-            />
-          </Adaptive>
+                user={user}
+                onCitySelect={handlerOpened}
+                authHandler={authFormHandler}
+                authIsOpened={false}
+              />
+          </Default>
+
+
+            
           {
             cityOpened &&
            <CItyModal 
